@@ -80,10 +80,10 @@ firebase deploy
 Hosting URL: https://*****.firebaseapp.com
 ```
 
-5.みんなでいじるためには
-1.Project Overview -> ユーザと権限 で追加
-2.git で突くコンテンツをclone
-3.firebase initで各自、アカウントとプロジェクトを紐付ける？
+5.みんなでいじるためには  
+1.Project Overview -> ユーザと権限 で追加  
+2.git でつつくコンテンツをclone     
+3.firebase initで各自、アカウントとプロジェクトを紐付ける？   
 
 ### 参考サイト
 firebaseは他に何ができるのか？
