@@ -1,24 +1,107 @@
 # firebase-sample
 
-###  Firebase CLIのインストール 
-firebase CLIを用いるには、firebase-toolsを導入する必要がある。  
+
+Vueの環境を構築し、Firebaseにデプロイするまでの一連の流れをまとめたReadme  
+注意 node.jsを導入し、npmコマンドが使用できることが前提 
+
+## Vue
+### 環境構築   
+vue-cliを導入する.     
+vue-cliを用いてvueプロジェクトの作成やbuildを行う.  
+```
+npm i vue-cli -g
+```
+
+### プロジェクトの作成  
+```
+vue init webpack ＜プロジェクト名＞
+```
+
+初期の設定はデフォルトで良いと思われる。  
+```
+? Project name <プロジェクト名>
+? Project description A Vue.js project
+? Author *** <e-mail@e-mail.com>
+? Vue build (Use arrow keys)
+```
+
+レコメンドされている方で。　　
+```
+? Vue build (Use arrow keys)
+❯ Runtime + Compiler: recommended for most users 
+  Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-
+specific HTML) are ONLY allowed in .vue files - render functions are r
+equired elsewhere 
+```
+
+router機能はこの先必要になるはず。  
+```
+? Install vue-router? (Y/n) Y
+```
+
+ESLintはソースコード検証ツールで、必ず必要なものではない。  
+```
+? Use ESLint to lint your code? (Y/n) n
+```
+
+Testモジュールは、とりあえず今は必要ない。  
+```
+? Set up unit tests (Y/n) n
+
+? Setup e2e tests with Nightwatch? (Y/n) n
+```
+
+安定のnpmで。 
+以上でプロジェクト作成は終了。 
+```
+? Should we run `npm install` for you after the project has been creat
+ed? (recommended) (Use arrow keys)
+❯ Yes, use NPM 
+  Yes, use Yarn 
+  No, I will handle that myself 
+```
+
+### 動作チェック・デバックのやりかた
+作成されたプロジェクトの動作チェック。  
+ローカルで開発する際のデバックとしてもこれからお世話になるはず。  
+```
+npm run dev
+```
+うまく動作すれば、以下のURLで作成したページにアクセスできる。  
+```
+http://localhost:8081
+```
+プロジェクトのbuildは以下のコマンドで行う。  
+```
+npm run build
+```
+distフォルダにbuild結果が格納される。  
+
+
+
+## Firebase
+###  環境構築 
+事前準備 firebaseにloginし、プロジェクト追加を選択。
+適当なプロジェクトを作成しておく。  
+```
+https://console.firebase.google.com/?hl=ja
+```
+
+firebase CLIを用いるには自分のローカル環境に、
+firebase-toolsを導入する必要がある。  
+実行できない場合は、自分のnode.jsなどを確認。  
 ```
 npm install -g firebase-tools
 ```
-
-### プロジェクトセットアップ〜htmlの公開(デプロイ)まで    
-コンテンツのデプロイは、firebase hostingを用いる  
-
-1.firebaseにloginし、適当なプロジェクトを作成しておく。  
-
-
-2.googleアカウントと紐付け  
+ターミナルから、googleアカウントと紐付けを行う。    
 ```
 firebase login  
 ```
 
 
-3.プロジェクトの紐付け  
+### プロジェクトセットアップ〜Vueプロジェクトの公開(デプロイ)まで    
+先程作成したVueプロジェクトのフォルダへ移動し、
+firebaseと連結させる。   
 ```
 firebase init
 ```
@@ -59,9 +142,12 @@ mple)
 ```
 
 ```
-What do you want to use as your public directory? public
+What do you want to use as your public directory? dist
 
-以降、publicフォルダの中のコンテンツが公開される。
+firebaseにデプロイするコンテンツが格納されているフォルダの選択。  
+デフォルトはpublicフォルダになっているが、
+Vueはbuild結果がdistフォルダに格納されるため、
+デプロイするフォルダはdistに設定する事。  
 ```
 
 ```
@@ -71,7 +157,7 @@ Configure as a single-page app (rewrite all urls to /index.html)? (y/N)
 ```
 
 
-4.デプロイ
+デプロイ
 ```
 firebase deploy
 ```
@@ -80,10 +166,14 @@ firebase deploy
 Hosting URL: https://*****.firebaseapp.com
 ```
 
-5.みんなでいじるためには  
-1.Project Overview -> ユーザと権限 で追加  
-2.git でつつくコンテンツをclone     
-3.firebase initで各自、アカウントとプロジェクトを紐付ける？   
+## 一連の流れ  
+vueをbuild→デプロイが一連の流れになる。  
+```
+npm run build
+firebase deploy
+```
+
+
 
 ### 参考サイト
 firebaseは他に何ができるのか？
