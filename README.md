@@ -1,5 +1,6 @@
 # firebase-sample
 
+
 Vueの環境を構築し、Firebaseにデプロイするまでの一連の流れをまとめたREADME
 注意 node.jsを導入し、npmコマンドが使用できることが前提 
 
